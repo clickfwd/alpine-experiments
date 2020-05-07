@@ -8,3 +8,5 @@ My goals:
 * Dynamically import the code for each component on the page.
 * Use ES Module syntax for everything.
 * Implement Spruce.
+
+Go to the experiment now: [experiment.html](./experiment.html)
