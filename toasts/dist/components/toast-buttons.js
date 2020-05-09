@@ -1,0 +1,1 @@
+import{buildComponent as s}from"../utils.js";var i=s({dismissible:!0,message:"",interval:""},{info(){$store.toasts.info(this.message,{dismissible:this.dismissible})},success(){$store.toasts.success(this.message,{dismissible:this.dismissible})},error(){$store.toasts.error(this.message,{dismissible:this.dismissible})}});export default i;

@@ -1,0 +1,48 @@
+
+<html>
+    <head>
+        <title>Alpine & Spruce Toasts</title>
+        <style>
+            [x-cloak] {
+                display: none !important;
+            }
+        </style>
+        <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
+    </head>
+    <body class="antialiased w-screen min-h-screen flex flex-col items-center justify-center">
+        <h1 class="text-3xl font-bold text-blue-900 mb-2">Toasts</h1>
+        <p class="max-w-md mb-8 text-justify text-gray-700">
+            Enter a message in the first box. Choose whether the toast should be dismissible. By default, each toast will automatically disappear <strong>5 seconds</strong> after creation. You can change this using the <code>number</code> input, using <code>milliseconds</code>.
+        </p>
+
+        <div x-data="toastButtons()">
+            <div class="mb-8 flex flex-col items-center">
+                <input type="text" x-model="message" class="mx-auto mb-4 shadow appearance-none border w-64 rounded block py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Type a message here...">
+                <div class="mb-4">
+                    <input type="checkbox" x-model="dismissible">
+                    <label class="">Dismissible?</label>
+                </div>
+                <div class="flex flex-col align-start">
+                    <input type="number" x-model="interval" class="mx-auto mb-4 w-64 shadow appearance-none border rounded py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" placeholder="Interval (ms)">
+                </div>
+            </div>
+
+            <button @click="info" class="bg-blue-500 mr-4 px-4 py-1 rounded-lg text-white font-bold">Info</button>
+            <button @click="success" class="bg-green-600 px-4 py-1 rounded-lg text-white font-bold">Success</button>
+            <button @click="error" class="bg-red-600 ml-4 px-4 py-1 rounded-lg text-white font-bold">Error</button>
+        </div>
+
+        <div x-data="toasts()" x-subscribe class="absolute right-0 bottom-0 mr-4 mb-4">
+            <template x-for="(toast, index) in $store.toasts.toasts" :key="index">
+                <div class="flex items-center justify-between mb-4" :class="classes[toast.type]" role="alert">
+                    <p x-text="toast.message" class="mr-4"></p>
+                    <button @click="$store.toasts.dismiss(index)" x-show="toast.dismissible">
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z" clip-rule="evenodd" fill-rule="evenodd"></path></svg>
+                    </button>
+                </div>
+            </template>
+        </div>
+
+        <script type="module" src="./dist/index.js"></script>
+    </body>
+</html>
